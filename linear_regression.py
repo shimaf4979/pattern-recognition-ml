@@ -12,6 +12,14 @@ class LinearRegression:
         self.cost_history = []
     
     def fit(self, X, y):
+
+        if X.shape[0] != y.shape[0]:
+            raise ValueError("X and y must have the same number of samples")
+        if np.any(np.isnan(X)) or np.any(np.isnan(y)):
+            raise ValueError("Input data contains NaN values")
+        if np.any(np.isinf(X)) or np.any(np.isinf(y)):
+            raise ValueError("Input data contains infinite values")
+
         n_samples, n_features = X.shape
         self.weights = np.zeros(n_features)
         self.bias = 0

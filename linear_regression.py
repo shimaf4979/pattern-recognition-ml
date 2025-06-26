@@ -1,6 +1,8 @@
 import numpy as np
 from sklearn.datasets import make_regression
 
+
+
 class LinearRegression:
     def __init__(self, learning_rate=0.01, n_iterations=1000):
         self.learning_rate = learning_rate
@@ -27,6 +29,24 @@ class LinearRegression:
     
     def predict(self, X):
         return np.dot(X, self.weights) + self.bias
+
+    def plot_cost_history(self):
+        plt.figure(figsize=(10, 6))
+        plt.plot(self.cost_history)
+        plt.title('Cost Function Over Iterations')
+        plt.xlabel('Iterations')
+        plt.ylabel('Cost')
+        plt.show()
+
+    def plot_regression_line(self, X, y):
+        plt.figure(figsize=(10, 6))
+        plt.scatter(X, y, color='blue', alpha=0.6)
+        y_pred = self.predict(X)
+        plt.plot(X, y_pred, color='red', linewidth=2)
+        plt.title('Linear Regression Result')
+        plt.xlabel('X')
+        plt.ylabel('y')
+        plt.show()
 
 if __name__ == "__main__":
     X, y = make_regression(n_samples=100, n_features=1, noise=10, random_state=42)
